@@ -1,18 +1,8 @@
 from odoo import models, fields
-import logging
-
-_logger = logging.getLogger(__name__)
 
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
-    
-    def _auto_init(self):
-        """Override _auto_init to add debugging info when model is initialized"""
-        _logger.info("EstateProperty model being initialized with state field")
-        result = super(EstateProperty, self)._auto_init()
-        _logger.info("EstateProperty model successfully initialized")
-        return result
 
     # Basic Information
     name = fields.Char(required=True)
