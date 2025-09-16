@@ -18,6 +18,7 @@ class EstateProperty(models.Model):
             ('sold', 'Sold'),
             ('cancelled', 'Cancelled'),
         ], default='new')
+    property_type_id = fields.Many2one("estate.property.type", string="Property Type")
     # Pricing
     expected_price = fields.Float(required=True)
     selling_price = fields.Float(readonly=True, copy=False)
