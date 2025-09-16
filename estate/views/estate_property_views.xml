@@ -59,6 +59,12 @@
                                 </group>
                             </group>
                         </page>
+                        <page string="People">
+                            <group>
+                                <field name="salesperson_id"/>
+                                <field name="buyer_id"/>
+                            </group>
+                        </page>
                     </notebook>
                     <group>
                         <field name="active"/>

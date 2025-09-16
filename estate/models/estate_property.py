@@ -40,3 +40,7 @@ class EstateProperty(models.Model):
             ('west', 'West'),
         ]
     )
+    
+    # People
+    salesperson_id = fields.Many2one('res.users', string='Salesperson', default=lambda self: self.env.user)
+    buyer_id = fields.Many2one('res.partner', string='Buyer', copy=False)

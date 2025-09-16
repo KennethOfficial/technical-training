@@ -6,3 +6,4 @@ class EstatePropertyType(models.Model):
 
     # Basic Information
     name = fields.Char(required=True)
+    
