@@ -66,3 +66,5 @@ class EstatePropertyOffer(models.Model):
         for record in self:
             record.status = 'refused'
         return True
+    
+    
