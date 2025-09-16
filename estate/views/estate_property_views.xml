@@ -14,7 +14,7 @@
                 <field name="living_area"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
-                <field name="date_availability"/>
+                <field name="date_availability" optional="hide"/>
                 <field name="state"/>
             </list>
         </field>
@@ -27,8 +27,8 @@
         <field name="arch" type="xml">
             <form string="Property">
                 <header>
-                    <button name="action_sold" string="Sold" type="object"/>
-                    <button name="action_cancel" string="Cancel" type="object"/>
+                    <button name="action_sold" string="Sold" type="object" invisible="state in ['sold', 'cancelled']"/>
+                    <button name="action_cancel" string="Cancel" type="object" invisible="state in ['sold', 'cancelled']"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -77,7 +77,7 @@
                             </group>
                         </page>
                         <page string="Offers">
-                            <field name="offer_ids"/>
+                            <field name="offer_ids" readonly="state in ['offer_accepted', 'sold', 'cancelled']"/>
                         </page>
                     </notebook>
                     <group>

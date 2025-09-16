@@ -5,7 +5,7 @@
         <field name="name">estate.property.offer.list</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <list string="Property Offers">
+            <list string="Property Offers" editable="bottom">
                 <field name="price"/>
                 <field name="partner_id"/>
                 <field name="validity"/>
@@ -22,8 +22,8 @@
         <field name="arch" type="xml">
             <form string="Property Offer">
                 <header>
-                    <button name="action_accept" string="Accept" type="object" icon="fa-check"/>
-                    <button name="action_refuse" string="Refuse" type="object" icon="fa-times"/>
+                    <button name="action_accept" string="Accept" type="object" icon="fa-check" invisible="status in ['accepted', 'refused']"/>
+                    <button name="action_refuse" string="Refuse" type="object" icon="fa-times" invisible="status in ['accepted', 'refused']"/>
                 </header>
                 <sheet>
                     <group>
