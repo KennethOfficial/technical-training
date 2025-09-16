@@ -67,4 +67,25 @@ class EstatePropertyOffer(models.Model):
             record.status = 'refused'
         return True
     
+    # CRUD Method Overrides
+    @api.model
+    def create(self, vals):
+        # Get the property record
+        property_id = vals.get('property_id')
+        if property_id:
+            property_record = self.env['estate.property'].browse(property_id)
+            
+            # Check if offer price is higher than existing offers
+            existing_offers = property_record.offer_ids
+            if existing_offers:
+                max_existing_price = max(existing_offers.mapped('price'))
+                if vals.get('price', 0) <= max_existing_price:
+                    raise UserError(f"Offer price must be higher than existing offers. Current highest offer: {max_existing_price}")
+            
+            # Set property state to 'Offer Received'
+            property_record.state = 'offer_received'
+        
+        # Always call super() to maintain the flow
+        return super().create(vals)
+    
     

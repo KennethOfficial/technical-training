@@ -114,3 +114,10 @@ class EstateProperty(models.Model):
                 raise ValidationError(
                     f"Selling price ({record.selling_price:.2f}) cannot be lower than 90% of expected price ({min_selling_price:.2f})"
                 )
+    
+    # CRUD Method Overrides
+    @api.ondelete(at_uninstall=False)
+    def _check_property_deletion(self):
+        for record in self:
+            if record.state not in ['new', 'cancelled']:
+                raise UserError(f"Cannot delete property '{record.name}' because it is in '{record.state}' state. Only 'New' or 'Cancelled' properties can be deleted.")
