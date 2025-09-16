@@ -69,6 +69,9 @@
                                 <field name="buyer_id"/>
                             </group>
                         </page>
+                        <page string="Offers">
+                            <field name="offer_ids"/>
+                        </page>
                     </notebook>
                     <group>
                         <field name="active"/>
