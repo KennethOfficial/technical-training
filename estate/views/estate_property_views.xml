@@ -67,11 +67,37 @@
         </field>
     </record>
 
+    <!-- Search View Definition -->
+    <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">estate.property.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Properties">
+                <field name="name" string="Title"/>
+                <field name="postcode"/>
+                <field name="expected_price"/>
+                <field name="bedrooms"/>
+                <field name="living_area" string="Living Area (sqm)"/>
+                <field name="facades"/>
+                <separator/>
+                <filter name="available" string="Available" domain="[('state', 'in', ['new', 'offer_received'])]"/>
+                <filter name="sold" string="Sold" domain="[('state', '=', 'sold')]"/>
+                <separator/>
+                <group expand="1" string="Group By">
+                    <filter name="state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="postcode" string="Postcode" context="{'group_by': 'postcode'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <!-- Action Window Definition -->
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Estate Properties</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">list,form</field>
         <field name="view_id" ref="estate_property_view_list"/>
+        <field name="search_view_id" ref="estate_property_view_search"/>
+        <field name="form_view_id" ref="estate_property_view_form"/>
     </record>
 </odoo>
