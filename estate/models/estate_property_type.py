@@ -3,13 +3,14 @@ from odoo import models, fields
 class EstatePropertyType(models.Model):
     _name = "estate.property.type"
     _description = "Real Estate Property Type"
-    _order = "name"
+    _order = "sequence, name"
     
     _sql_constraints = [
         ('check_name_unique', 'UNIQUE(name)', 'Property type name must be unique'),
     ]
 
     # Basic Information
+    sequence = fields.Integer(default=10)
     name = fields.Char(required=True)
     
     # Relationships
