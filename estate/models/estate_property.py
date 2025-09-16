@@ -1,8 +1,15 @@
 from odoo import models, fields
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real Estate Property"
+    
+    def __init__(self, *args, **kwargs):
+        super(EstateProperty, self).__init__(*args, **kwargs)
+        _logger.info("EstateProperty model initialized with state field")
 
     # Basic Information
     name = fields.Char(required=True)
