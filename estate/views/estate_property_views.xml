@@ -19,7 +19,7 @@
     </record>
 
     <!-- Form View Definition -->
-    <!-- <record id="estate_property_view_form" model="ir.ui.view">
+    <record id="estate_property_view_form" model="ir.ui.view">
         <field name="name">estate.property.form</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
@@ -52,8 +52,8 @@
                                 <group>
                                     <field name="garage"/>
                                     <field name="garden"/>
-                                    <field name="garden_area" attrs="{'invisible': [('garden', '=', False)]}"/>
-                                    <field name="garden_orientation" attrs="{'invisible': [('garden', '=', False)]}"/>
+                                    <field name="garden_area" invisible="garden == False"/>
+                                    <field name="garden_orientation" invisible="garden == False"/>
                                 </group>
                             </group>
                         </page>
@@ -65,10 +65,10 @@
                 </sheet>
             </form>
         </field>
-    </record> -->
+    </record>
 
     <!-- Search View Definition -->
-    <!-- <record id="estate_property_view_search" model="ir.ui.view">
+    <record id="estate_property_view_search" model="ir.ui.view">
         <field name="name">estate.property.search</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
@@ -89,7 +89,7 @@
                 </group>
             </search>
         </field>
-    </record> -->
+    </record>
 
     <!-- Action Window Definition -->
     <record id="estate_property_action" model="ir.actions.act_window">
