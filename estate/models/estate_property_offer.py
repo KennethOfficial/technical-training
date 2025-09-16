@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from datetime import timedelta
+from odoo.exceptions import UserError
 
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
@@ -39,3 +40,23 @@ class EstatePropertyOffer(models.Model):
                 today = fields.Date.today()
                 delta = record.date_deadline - today
                 record.validity = delta.days
+    
+    # Button Action Methods (Public - no underscore prefix)
+    def action_accept(self):
+        for record in self:
+            # Refuse all other offers for this property first
+            other_offers = record.property_id.offer_ids.filtered(lambda o: o.id != record.id)
+            other_offers.write({'status': 'refused'})
+            
+            # Accept this offer
+            record.status = 'accepted'
+            
+            # Set buyer and selling price on the property
+            record.property_id.buyer_id = record.partner_id
+            record.property_id.selling_price = record.price
+        return True
+    
+    def action_refuse(self):
+        for record in self:
+            record.status = 'refused'
+        return True
